@@ -1,40 +1,41 @@
 package com.test.alianza;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.Assert.assertNotNull;
+import static org.mockito.Mockito.mock;
 
-import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.junit.Before;
+import org.junit.Test;
 
 import com.test.alianza.controller.ClientController;
 import com.test.alianza.delegate.ClientDelegate;
 import com.test.alianza.service.ClientService;
 
-@SpringBootTest
-class AlianzaApplicationTests {
+public class AlianzaApplicationTests {
 
-	@Autowired
 	private ClientController clientController;
-
-	@Autowired
 	private ClientDelegate clientDelegate;
-
-	@Autowired
 	private ClientService clientService;
+	
+    @Before
+    public void setup() {
+    	clientController = mock(ClientController.class);
+    	clientDelegate = mock(ClientDelegate.class);
+    	clientService = mock(ClientService.class);
+    }
 
 	@Test
-	void contextLoads() {
-		assertThat(clientController).isNotNull();
+	public void contextLoads() {
+		assertNotNull(clientController);
 	}
 
 	@Test
-	void delegateLoads() {
-		assertThat(clientDelegate).isNotNull();
+	public void delegateLoads() {
+		assertNotNull(clientDelegate);
 	}
 
 	@Test
-	void serviceLoads() {
-		assertThat(clientService).isNotNull();
+	public void serviceLoads() {
+		assertNotNull(clientService);
 	}
 
 }
