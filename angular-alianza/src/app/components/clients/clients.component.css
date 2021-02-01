@@ -1,0 +1,38 @@
+.modal-header {
+    border-bottom: 1px solid #626457;
+}
+
+.modal-content {
+    background-color: #b5d8e0;
+}
+
+.modal-dialog {
+    max-width: 38rem;
+}
+
+.letter-gray {
+    color: #626457;
+}
+
+.img{
+    width: 10rem;
+    height: auto;
+}
+
+.table-responsive {
+    overflow-x:auto;
+}
+
+.clients-text {
+    color:#51A1DF;
+    font-weight: bold;
+    font-size: 1.4rem;
+}
+
+.pencil-color-gray {
+    color: #808080;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}

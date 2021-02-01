@@ -1,0 +1,124 @@
+<div class="mx-3 mx-lg-5">
+    <div>
+        <img class="img" src="https://www.alianza.com.co/image/layout_set_logo?img_id=22172&t=1611112277523"
+            alt="Alianza logo">
+    </div>
+
+    <div class="row mx-1 mx-lg-5 mt-5">
+        <div class="col-12 col-lg-3 mb-3 mb-lg-0">
+            <p class="text-center text-lg-left clients-text"><i class="fa fa-user"></i> Clients</p>
+            <p class="text-center text-lg-left ml-0 ml-lg-4">Cients</p>
+            <p class="text-center text-lg-left ml-0 ml-lg-4">Client look history</p>
+            <p class="text-center text-lg-left ml-0 ml-lg-4">Emergency PIN configuration</p>
+            <p class="text-center text-lg-left ml-0 ml-lg-4">Emergency PIN history</p>
+        </div>
+        <div class="col-12 col-lg-9">
+            <div class="row">
+                <div class="col-3 col-lg-2 mb-2 pl-0">
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal">
+                        <i class="fa fa-plus"></i> New
+                    </button>
+                </div>
+                <div class="col-4 col-lg-2 mb-2 pl-0">
+                    <button type="button" class="btn btn-primary">
+                        <i class="fa fa-download" aria-hidden="true"></i>Export</button>
+                </div>
+            </div>
+
+            <div class="row mb-5 mb-lg-3">
+                <div class=" col-12 col-lg-8 pl-0">
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Enter shared key" aria-label="shared key"
+                            aria-describedby="basic-addon2" [(ngModel)]="sharedKey">
+                        <div class="input-group-append">
+                            <span class="input-group-text cursor-pointer" id="basic-addon2"
+                                (click)="getClientInfo()">search</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-lg-4 pl-0">
+                    <button type="button" class="btn btn-primary">Advanced Search</button>
+                </div>
+            </div>
+
+            <div class="row table-responsive">
+                <p class="clients-text">Clients</p>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Shared Key</th>
+                            <th scope="col">Business ID</th>
+                            <th scope="col">E-mail</th>
+                            <th scope="col">Phone</th>
+                            <th scope="col">Data Added</th>
+                            <th scope="col"><i class="fa fa-pencil" aria-hidden="true"></i></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let client of clientList">
+                            <td>{{client.sharedKey}}</td>
+                            <td>{{client.businessId}}</td>
+                            <td>{{client.email}}</td>
+                            <td>{{client.phone}}</td>
+                            <td>{{client.startDate | date:'dd/MM/yyyy'}}</td>
+                            <td><i class="fa fa-pencil pencil-color-gray" aria-hidden="true"></i></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="createClientModal" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title letter-gray" id="createNewClient">Create New Client</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body mx-lg-5 mx-3">
+                <div class="form-group row">
+                    <label for="nameLabel" class="col-sm-2 col-form-label letter-gray">Name</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="nameLabel" [(ngModel)]="name">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="phoneLabel" class="col-sm-2 col-form-label letter-gray">Phone</label>
+                    <div class="col-sm-10">
+                        <input type="number" class="form-control" id="phoneLabel" [(ngModel)]="phone" min="3000000000"
+                            max="3509999999">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="emailLabel" class="col-sm-2 col-form-label letter-gray">E-mail</label>
+                    <div class="col-sm-10">
+                        <input type="email" class="form-control" id="emailLabel" [(ngModel)]="email">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="startDatelabel" class="col-sm-2 col-form-label letter-gray">Start date</label>
+                    <div class="col-sm-10">
+                        <input type="date" class="form-control" id="startDatelabel" [(ngModel)]="startDate" max="{{getEndDate() | date:'yyyy-MM-dd'}}">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="endDateLabel" class="col-sm-2 col-form-label letter-gray">End Date</label>
+                    <div class="col-sm-10">
+                        <input type="date" class="form-control" id="endDateLabel" [(ngModel)]="endDate" min="{{getStartDate() | date:'yyyy-MM-dd'}}">
+                    </div>
+                </div>
+                <div class="d-flex justify-content-end">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" [disabled]="!validateFields()"
+                        (click)="createClient()">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ngx-spinner></ngx-spinner>
